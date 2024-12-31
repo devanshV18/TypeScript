@@ -1,34 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import "./App.css"
+import { RootState } from "./redux/store";
+import { decrement, increment, incrementByValue } from "./redux/Slices/counterSlice";
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const App = () => {
+
+
+  const { value }  = useSelector((state: RootState) => state.counter)
+  const [val, setVal] = useState<number>(0)
+
+  const dispatch = useDispatch()
+
+  const handleIncrement = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    dispatch(increment())
+  }
+
+  const handleDecrement = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    dispatch(decrement())
+
+  }
+
+  const handleIncrementByAmount = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    dispatch(incrementByValue(val))
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='container'>
+      <button className='btn' onClick={handleIncrement}>+</button>
+      <p>Count {value}</p>
+      <button className='btn' onClick={handleDecrement}>-</button>
+      <button className='btn'>Reset</button>
+
+      <input type='number' placeholder='0' value={val} onChange={(e) => setVal(Number(e.target.value))}/>
+      <button className='btn' onClick={handleIncrementByAmount}>Increment by amount</button>
+
+    </div>
   )
 }
 
