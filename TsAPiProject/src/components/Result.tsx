@@ -4,7 +4,6 @@ import { clearState } from "../Redux/slices"
 import { useNavigate } from "react-router-dom"
 import { countMatchingElements } from "../utils/features"
 
-const result = ["Lol", "Sample", "Ans"]
 
 const Result = () => {
   const dispatch = useDispatch()
