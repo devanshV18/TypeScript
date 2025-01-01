@@ -1,9 +1,23 @@
+import { AppBar, Toolbar, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
+
+const styles = {
+    color: "white",
+    margin: "0.5rem",
+    textDecoration: "none"
+}
 
 const Header = () => {
   return (
-    <div>
-      Header
-    </div>
+    <AppBar position="static">
+        <Toolbar>
+            <Typography variant="h6" mr={"auto"} textTransform={"uppercase"}>
+                Learn Do Karlo Babu.
+            </Typography>
+            <Link style={styles} to={"/"}>Home</Link>
+            <Link style={styles} to={"/login"}>Login</Link>
+        </Toolbar>
+    </AppBar>
   )
 }
 
